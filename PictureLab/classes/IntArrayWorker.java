@@ -3,6 +3,7 @@ public class IntArrayWorker
   /** two dimensional matrix */
   private int[][] matrix = null;
   
+  
   /** set the matrix to the passed one
     * @param theMatrix the one to use
     */
@@ -98,5 +99,53 @@ public class IntArrayWorker
       }
     }
   }
- 
+  public int getCount(int num)
+  {
+    int matCol;
+    int matRow;
+    matRow= matrix.length;
+    matCol= matrix[0].length;
+    int check= num;
+    int count=0;
+    for (int i=0; i<matRow; i++)
+    {
+       for (int j=0; j<matCol; j++)
+       {
+           if( matrix[i][j] == num)
+           {count++;
+            }
+       }
+    }
+    return count;
+    }
+  public int getLargest()
+  {
+    int matCol;
+    int matRow;
+    matRow= matrix.length;
+    matCol= matrix[0].length;
+    int max=matrix[0][0];
+    for (int i=0; i<matRow; i++)
+    {
+       for (int j=0; j<matCol; j++)
+       {
+           if( matrix[i][j] >= max)
+           {max= matrix[i][j];
+            }
+       }
+    }
+    return max;
+    }
+  public int getColTotal(int col)
+  {
+      int column= col;
+      int matCol;
+      matCol= matrix.length;
+      int colTot=0;
+      for( int i=0; i<matCol; i++)
+      { colTot+= matrix[i][column];
+      }
+      return colTot;
+  }
+    
 }
