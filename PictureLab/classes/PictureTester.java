@@ -17,6 +17,13 @@ public class PictureTester
     beach.explore();
   }
   
+  public static void testMirriorVerticalRightToLeft()
+  { Picture caterpillar = new Picture("caterpillar.jpg");
+    caterpillar.explore();
+    caterpillar.mirrorVerticalRightToLeft();
+    caterpillar.explore();
+      
+  }
   /** Method to test mirrorVertical */
   public static void testMirrorVertical()
   {
@@ -58,6 +65,8 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
+    DigitalPicture p= new Picture();
+    SimplePicture a= new Picture();
     testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
