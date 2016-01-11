@@ -138,23 +138,63 @@ public class Picture extends SimplePicture
     } 
   }
   
-  public void mirrorHorizontal()//working on atm
+  public void mirrorHorizontal()
   { Pixel[][] pixels = this.getPixels2D();
     Pixel topPixel = null;
     Pixel bottomPixel = null;
-    int height = pixels.length;
-    for (int row = 0; row < pixels.length; row++)
+    int width = pixels.length;
+    int height = pixels[0].length;
+    
+    for (int row = 0; row < width; row++)
     {
-      for (int col = 0; col < height / 2; col++)
+      for (int col = 0; col < height; col++)
       {
         topPixel = pixels[row][col];
-        bottomPixel = pixels[height- 1- row][col];
+        bottomPixel = pixels[width-1-row][col];
+        bottomPixel.setColor(topPixel.getColor());
+      }
+    } 
+    }
+    
+  public void mirrorHorizontalBottomToTop()
+  { Pixel[][] pixels = this.getPixels2D();
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
+    int width = pixels.length;
+    int height = pixels[0].length;
+    
+    for (int row = 0; row < width; row++)
+    {
+      for (int col = 0; col < height; col++)
+      {
+        topPixel = pixels[row][col];
+        bottomPixel = pixels[width-1-row][col];
         topPixel.setColor(bottomPixel.getColor());
       }
     } 
     }
-  
-  /** Mirror just part of a picture of a temple */
+    
+    public void mirrorDiagonally()
+  { Pixel[][] pixels = this.getPixels2D();
+    Pixel topPixel = null;
+    Pixel bottomPixel = null;
+    int width = pixels.length;
+    int height = pixels[0].length;
+    int widthSq= width*width;
+    int heightSq=height*height;
+    double diag= Math.sqrt(widthSq+heightSq);
+    
+    for (int row = 0; row < width; row++)
+    {
+      for (int col = 0; col < height; col++)
+      {
+        topPixel = pixels[row][col];
+        bottomPixel = pixels[width-1-row][col];
+        bottomPixel.setColor(topPixel.getColor());
+      }
+    } 
+    }
+  //** Mirror just part of a picture of a temple *
   public void mirrorTemple()
   {
     int mirrorPoint = 276;

@@ -33,6 +33,20 @@ public class PictureTester
     caterpillar.explore();
   }
   
+    public static void testMirrorHoizontal()
+  {
+    Picture redMotorcycle = new Picture("redMotorcycle.jpg");
+    redMotorcycle.explore();
+    redMotorcycle.mirrorHorizontal();
+    redMotorcycle.explore();
+  }
+      public static void testMirrorHoizontalBottomToTop()
+  {
+    Picture redMotorcycle = new Picture("redMotorcycle.jpg");
+    redMotorcycle.explore();
+    redMotorcycle.mirrorHorizontalBottomToTop();
+    redMotorcycle.explore();
+  }
   /** Method to test mirrorTemple */
   public static void testMirrorTemple()
   {
