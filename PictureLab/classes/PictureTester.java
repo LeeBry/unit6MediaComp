@@ -40,11 +40,11 @@ public class PictureTester
     redMotorcycle.mirrorHorizontal();
     redMotorcycle.explore();
   }
-    public static void testMirrorDiagonally()
+    public static void testMirrorDiagonal()
   {
     Picture redMotorcycle = new Picture("redMotorcycle.jpg");
     redMotorcycle.explore();
-    redMotorcycle.mirrorDiagonally();
+    redMotorcycle.mirrorDiagonal();
     redMotorcycle.explore();
   }
       public static void testMirrorHoizontalBottomToTop()
@@ -109,11 +109,11 @@ public class PictureTester
     //testNegate();
     //testGrayscale();
     //testFixUnderwater();
-    //testMirrorVertical();
-    //testMirrorTemple();
-    //testMirrorArms();
-    //testMirrorGull();
-    //testMirrorDiagonal();
+    testMirrorVertical();
+    testMirrorTemple();
+    testMirrorArms();
+    testMirrorGull();
+    testMirrorDiagonal();
     //testCollage();
     //testCopy();
     //testEdgeDetection();

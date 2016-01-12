@@ -155,7 +155,14 @@ public class Picture extends SimplePicture
       }
     } 
     }
-    
+  public void color()
+  {Pixel[][] pixels = this.getPixels2D();
+   Pixel topPixel = pixels[53][42];
+   Pixel bottomPixel = pixels[158][246];
+   
+   System.out.println(bottomPixel.getColor());
+   
+  }
   public void mirrorHorizontalBottomToTop()
   { Pixel[][] pixels = this.getPixels2D();
     Pixel topPixel = null;
@@ -174,7 +181,7 @@ public class Picture extends SimplePicture
     } 
     }
     
-    public void mirrorDiagonally()
+    public void mirrorDiagonal()
   { Pixel[][] pixels = this.getPixels2D();
     Pixel topPixel = null;
     Pixel flipPixel = null;
