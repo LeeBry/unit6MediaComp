@@ -40,12 +40,33 @@ public class PictureTester
     redMotorcycle.mirrorHorizontal();
     redMotorcycle.explore();
   }
+    public static void testMirrorDiagonally()
+  {
+    Picture redMotorcycle = new Picture("redMotorcycle.jpg");
+    redMotorcycle.explore();
+    redMotorcycle.mirrorDiagonally();
+    redMotorcycle.explore();
+  }
       public static void testMirrorHoizontalBottomToTop()
   {
     Picture redMotorcycle = new Picture("redMotorcycle.jpg");
     redMotorcycle.explore();
     redMotorcycle.mirrorHorizontalBottomToTop();
     redMotorcycle.explore();
+  }
+  public static void testMirrorArms()
+  {
+    Picture snowman = new Picture("snowman.jpg");
+    snowman.explore();
+    snowman.mirrorArms();
+    snowman.explore();
+  }
+  public static void testMirrorGull()
+  {
+    Picture seagull = new Picture("seagull.jpg");
+    seagull.explore();
+    seagull.mirrorSeagull();
+    seagull.explore();
   }
   /** Method to test mirrorTemple */
   public static void testMirrorTemple()
