@@ -155,14 +155,21 @@ public class Picture extends SimplePicture
       }
     } 
     }
-  public void color()
+    
+  public void color()// checking just for the heck of it
   {Pixel[][] pixels = this.getPixels2D();
    Pixel topPixel = pixels[53][42];
    Pixel bottomPixel = pixels[158][246];
-   
-   System.out.println(bottomPixel.getColor());
-   
+   for (int row= 53; row<158; row++)
+   {
+       for (int col=42; col<246; col++)
+       {
+              topPixel.setColor(bottomPixel.getColor());
+       }
+    }
+  
   }
+  
   public void mirrorHorizontalBottomToTop()
   { Pixel[][] pixels = this.getPixels2D();
     Pixel topPixel = null;
@@ -261,6 +268,7 @@ public class Picture extends SimplePicture
     }
       
   }
+  
    public void mirrorSeagull()
   {
     Pixel[][] pixels = this.getPixels2D();
@@ -283,6 +291,32 @@ public class Picture extends SimplePicture
     }
 
   }
+  
+  public void cropAndCopy( Picture sourcePicture, 
+  int startSourceRow, int endSourceRow, 
+  int startSourceCol, int endSourceCol,
+  int startDestRow, int startDestCol ) //working on atm
+  {
+      Pixel[][] pixels = this.getPixels2D();
+      Pixel grabPixel= null;
+      Pixel placePixel= null;
+      for(int i=startSourceRow; i<endSourceRow; i++)
+      {
+          for(int j=startSourceCol; j< endSourceCol; j++)
+          {
+              grabPixel= pixels[i][j];
+              for (int k=startDestRow; k<startDestRow+(endSourceRow-startSourceRow);k++)
+              {
+                  //need one more for loop
+                  placePixel= pixels[k][startDestCol];
+                  placePixel.setColor(grabPixel.getColor());
+                }
+          }
+      }
+      
+      
+    }
+    
   /** copy from the passed fromPic to the
     * specified startRow and startCol in the
     * current picture

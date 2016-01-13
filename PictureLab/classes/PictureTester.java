@@ -16,7 +16,13 @@ public class PictureTester
     beach.zeroBlue();
     beach.explore();
   }
-  
+  public static void testColor()
+  {
+    Picture beach = new Picture("beach.jpg");
+    beach.explore();
+    beach.color();
+    beach.explore();
+  }
   public static void testMirriorVerticalRightToLeft()
   { Picture caterpillar = new Picture("caterpillar.jpg");
     caterpillar.explore();
@@ -76,7 +82,13 @@ public class PictureTester
     temple.mirrorTemple();
     temple.explore();
   }
-  
+    public static void testCropAndCopy()
+  {
+    Picture temple = new Picture("temple.jpg");
+    temple.explore();
+    temple.cropAndCopy(temple, 150,200,150,200,300,20);
+    temple.explore();
+  }
   /** Method to test the collage method */
   public static void testCollage()
   {
