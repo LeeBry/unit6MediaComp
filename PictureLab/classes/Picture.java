@@ -308,7 +308,7 @@ public class Picture extends SimplePicture
           {
               int kEnd= startDestRow+(endSourceRow-startSourceRow);
               int pEnd=startDestRow+(endSourceCol-startSourceCol);
-              System.out.println (k + ""+kEnd+""+p+""+pEnd);
+              //System.out.println (k + ""+kEnd+""+p+""+pEnd); Used to see values
               grabPixel= pixels[i][j];
               placePixel= pixels[k][p];
               placePixel.setColor(grabPixel.getColor());
