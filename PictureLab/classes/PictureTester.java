@@ -86,7 +86,7 @@ public class PictureTester
   {
     Picture temple = new Picture("temple.jpg");
     temple.explore();
-    temple.cropAndCopy(temple, 150,200,150,200,300,20);
+    temple.cropAndCopy(temple, 300,350,300,350,100,90);
     temple.explore();
   }
   /** Method to test the collage method */

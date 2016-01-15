@@ -295,22 +295,35 @@ public class Picture extends SimplePicture
   public void cropAndCopy( Picture sourcePicture, 
   int startSourceRow, int endSourceRow, 
   int startSourceCol, int endSourceCol,
-  int startDestRow, int startDestCol ) //working on atm
+  int startDestRow, int startDestCol ) 
   {
       Pixel[][] pixels = this.getPixels2D();
       Pixel grabPixel= null;
       Pixel placePixel= null;
+      int k= startDestRow;
+      int p=startDestCol;
       for(int i=startSourceRow; i<endSourceRow; i++)
       {
           for(int j=startSourceCol; j< endSourceCol; j++)
           {
+              int kEnd= startDestRow+(endSourceRow-startSourceRow);
+              int pEnd=startDestRow+(endSourceCol-startSourceCol);
+              System.out.println (k + ""+kEnd+""+p+""+pEnd);
               grabPixel= pixels[i][j];
-              for (int k=startDestRow; k<startDestRow+(endSourceRow-startSourceRow);k++)
-              {
-                  //need one more for loop
-                  placePixel= pixels[k][startDestCol];
-                  placePixel.setColor(grabPixel.getColor());
+              placePixel= pixels[k][p];
+              placePixel.setColor(grabPixel.getColor());
+              if( k==kEnd)
+              {p++;
+               k=startDestRow;
+              }
+              if(p== pEnd)
+              {break;
                 }
+
+              k++;
+             
+
+                
           }
       }
       
