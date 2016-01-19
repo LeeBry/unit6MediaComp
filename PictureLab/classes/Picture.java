@@ -138,6 +138,9 @@ public class Picture extends SimplePicture
     } 
   }
   
+  /** Method that mirrors the picture around a 
+    * Horixontal mirror in the center of the picture
+    * from top to bottom */
   public void mirrorHorizontal()
   { Pixel[][] pixels = this.getPixels2D();
     Pixel topPixel = null;
@@ -155,22 +158,11 @@ public class Picture extends SimplePicture
       }
     } 
     }
-    
-  public void color()// checking just for the heck of it
-  {Pixel[][] pixels = this.getPixels2D();
-   Pixel topPixel = pixels[53][42];
-   Pixel bottomPixel = pixels[158][246];
-   for (int row= 53; row<158; row++)
-   {
-       for (int col=42; col<246; col++)
-       {
-              topPixel.setColor(bottomPixel.getColor());
-       }
-    }
   
-  }
-  
-  public void mirrorHorizontalBottomToTop()
+  /** Method that mirrors the picture around a 
+    * Horizontal mirror in the center of the picture
+    * from bottom to top */
+    public void mirrorHorizontalBottomToTop()
   { Pixel[][] pixels = this.getPixels2D();
     Pixel topPixel = null;
     Pixel bottomPixel = null;
@@ -188,6 +180,9 @@ public class Picture extends SimplePicture
     } 
     }
     
+   /** Method that mirrors the picture around a 
+    * diagonal mirror in the center of the picture
+   */
     public void mirrorDiagonal()
   { Pixel[][] pixels = this.getPixels2D();
     Pixel topPixel = null;
@@ -269,6 +264,28 @@ public class Picture extends SimplePicture
       
   }
   
+  public void flipImage()
+  {
+   Pixel[][] pixels = this.getPixels2D();
+   Pixel[][] pixels2= this.getPixels2D();
+   
+   Pixel leftPixel = null;
+   Pixel rightPixel = null;
+   int width = pixels.length;
+   int height = pixels[0].length;
+   
+   for (int i=0; i <width; i++)
+   {
+       for(int j=0; j<height; j++)
+       {
+           leftPixel= pixels[i][j];
+           rightPixel= pixels2[width-i-1][height-j-1];
+           rightPixel.setColor(leftPixel.getColor());
+           
+        }
+    }
+  }
+  
    public void mirrorSeagull()
   {
     Pixel[][] pixels = this.getPixels2D();
@@ -283,7 +300,7 @@ public class Picture extends SimplePicture
       {
         
         leftPixel = pixels[row][col];      
-        rightPixel = pixels[row][col+100];
+        rightPixel = pixels[row][col+150];
         rightPixel.setColor(leftPixel.getColor());
       
        
@@ -320,9 +337,7 @@ public class Picture extends SimplePicture
               {break;
                 }
 
-              k++;
-             
-
+              k++;            
                 
           }
       }
@@ -376,6 +391,11 @@ public class Picture extends SimplePicture
     this.copy(flower2,500,0);
     this.mirrorVertical();
     this.write("collage.jpg");
+  }
+  
+  public void createCollage2()
+  {
+      Picture android= new Picture("android.jpg");
   }
   
   

@@ -16,13 +16,7 @@ public class PictureTester
     beach.zeroBlue();
     beach.explore();
   }
-  public static void testColor()
-  {
-    Picture beach = new Picture("beach.jpg");
-    beach.explore();
-    beach.color();
-    beach.explore();
-  }
+
   public static void testMirriorVerticalRightToLeft()
   { Picture caterpillar = new Picture("caterpillar.jpg");
     caterpillar.explore();
@@ -96,7 +90,12 @@ public class PictureTester
     canvas.createCollage();
     canvas.explore();
   }
-  
+  public static void testflip()
+  { Picture temple = new Picture("temple.jpg");
+    temple.explore();
+    temple.flipImage();
+    temple.explore();
+    }
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
   {
@@ -112,20 +111,20 @@ public class PictureTester
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    DigitalPicture p= new Picture();
-    SimplePicture a= new Picture();
-    testZeroBlue();
+    //DigitalPicture p= new Picture();
+    //SimplePicture a= new Picture();
+    //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
     //testNegate();
     //testGrayscale();
     //testFixUnderwater();
-    testMirrorVertical();
-    testMirrorTemple();
-    testMirrorArms();
-    testMirrorGull();
-    testMirrorDiagonal();
+    //testMirrorVertical();
+    //testMirrorTemple();
+    //testMirrorArms();
+    //testMirrorGull();
+    //testMirrorDiagonal();
     //testCollage();
     //testCopy();
     //testEdgeDetection();
