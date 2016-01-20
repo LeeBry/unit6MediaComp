@@ -264,28 +264,79 @@ public class Picture extends SimplePicture
       
   }
   
-  public void flipImage()
+  public void addLines()
   {
    Pixel[][] pixels = this.getPixels2D();
-   Pixel[][] pixels2= this.getPixels2D();
-   
-   Pixel leftPixel = null;
-   Pixel rightPixel = null;
-   int width = pixels.length;
-   int height = pixels[0].length;
-   
-   for (int i=0; i <width; i++)
-   {
-       for(int j=0; j<height; j++)
-       {
-           leftPixel= pixels[i][j];
-           rightPixel= pixels2[width-i-1][height-j-1];
-           rightPixel.setColor(leftPixel.getColor());
-           
-        }
+   Pixel rowPixels= null;
+   int size= 5;
+   int width= pixels.length;
+   int height= pixels[0].length;
+   for (int row = 0; row < width; row++)
+    {
+      for (int col = 0; col < height; col++)
+      {
+          if (row%size == 0)
+          {
+              rowPixels= pixels[row][col];
+              Color chosenColor = new Color(0,0,0);
+              rowPixels.setColor(chosenColor);
+            }
+
+      }
     }
+    
   }
   
+  /**
+   * Changes the color of the whole image to half its value.
+   */
+  public void changeColor()
+  {
+   Pixel[][] pixels = this.getPixels2D();
+   Pixel rowPixels= null;
+   int width= pixels.length;
+   int height= pixels[0].length;
+   for (int row = 0; row < width; row++)
+    {
+      for (int col = 0; col < height; col++)
+      {
+          rowPixels= pixels[row][col];
+          int r=rowPixels.getRed()/2;
+          int g=rowPixels.getGreen()/2;
+          int b=rowPixels.getBlue()/2;
+          Color chosenColor = new Color(r,g,b);
+          rowPixels.setColor(chosenColor);
+ 
+      }
+    }
+    
+  }
+  public void eliminateWhite()
+  {
+   Pixel[][] pixels = this.getPixels2D();
+   Pixel rowPixels= null;
+   int width= pixels.length;
+   int height= pixels[0].length;
+   for (int row = 0; row < width; row++)
+    {
+      for (int col = 0; col < height; col++)
+      {
+          rowPixels= pixels[row][col];
+          int r=rowPixels.getRed();
+          int g=rowPixels.getGreen();
+          int b=rowPixels.getBlue();
+          Color chosenColor = new Color(r,g,b);
+          Color white= new Color(255,255,255);
+          if (chosenColor== white)
+          {
+             rowPixels.setColor(null);
+            }
+        
+ 
+      }
+    }
+    
+  }
    public void mirrorSeagull()
   {
     Pixel[][] pixels = this.getPixels2D();
@@ -396,6 +447,15 @@ public class Picture extends SimplePicture
   public void createCollage2()
   {
       Picture android= new Picture("android.jpg");
+      Picture background= new Picture("640x480.jpg");
+      background.changeColor();
+      android.addLines();
+      android.edgeDetection(5);
+      this.copy(background,0,0);
+      this.copy(android,100,100);
+      
+     
+      
   }
   
   

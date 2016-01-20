@@ -90,10 +90,17 @@ public class PictureTester
     canvas.createCollage();
     canvas.explore();
   }
-  public static void testflip()
+  public static void testCollage2()
+  {
+    Picture canvas = new Picture("640x480.jpg");
+    canvas.createCollage2();
+    canvas.explore();
+  }
+  public static void testAddLines()
   { Picture temple = new Picture("temple.jpg");
     temple.explore();
-    temple.flipImage();
+    temple.addLines();
+    temple.changeColor();
     temple.explore();
     }
   /** Method to test edgeDetection */
