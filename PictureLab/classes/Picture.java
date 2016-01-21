@@ -534,9 +534,9 @@ public class Picture extends SimplePicture
       Picture android3= new Picture("android.jpg");
       Picture android4= new Picture("android.jpg");
       
-      Picture canvas= new Picture("640x480.jpg");
-      canvas.eliminateWhite();
+      Picture canvas= new Picture(1600,1600);
       //for android 1
+      android1= android1.scaleByHalf();
       android1.eliminateWhite();
       android1.addLines();
       android1.mirrorDiagonalAndColor();
@@ -547,7 +547,7 @@ public class Picture extends SimplePicture
       
       
       this.copy(canvas,0,0);
-      this.copy(android1,0,0);
+      this.copy(android1,0,400);
       this.copy(android2,0,0);
       //this.write("collage.jpg"); //use this to write the image for the collage
      
