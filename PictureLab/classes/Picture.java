@@ -359,11 +359,35 @@ public class Picture extends SimplePicture
           int g=onePixels.getGreen();
           int b=onePixels.getBlue();
           Color chosenColor = new Color(r,g,b);
-          Color black = new Color (0,0,0);
+          Color black = new Color (0,0,0,50);
           if (r>= 240 && g>= 240 && b>=240) //the >= gives it a range for the whites.
           {
              onePixels.setColor(black);
             }
+        
+ 
+      }
+    }
+    
+  }
+   public void setTrans()
+  {
+   Pixel[][] pixels = this.getPixels2D();
+   Pixel onePixels= null;
+   int width= pixels.length;
+   int height= pixels[0].length;
+   for (int row = 0; row < width; row++)
+    {
+      for (int col = 0; col < height; col++)
+      {
+          onePixels= pixels[row][col];
+          int r=onePixels.getRed();
+          int g=onePixels.getGreen();
+          int b=onePixels.getBlue();
+          Color trans = new Color (r,g,b,50);
+          
+             onePixels.setColor(trans);
+            
         
  
       }
@@ -429,11 +453,30 @@ public class Picture extends SimplePicture
       
     }
     
-  public void scaleByHalf() // working on
+  public Picture scaleByHalf() // working
   {
     Pixel[][] pixels = this.getPixels2D();
-    int width= pixels.length;
-    int height = pixels[0].length;
+    int height= pixels.length;
+    int width = pixels[0].length;
+    int width2;
+    int height2;
+    Picture newPic= new Picture(height/2+1, width/2+1 );
+    Pixel grabPixel= null;
+    Pixel[][] newPics= newPic.getPixels2D();
+    for (int i=0; i<height;i+=2)
+    {
+        for(int j=0; j<width; j+=2)
+        {
+            grabPixel= pixels[i][j];
+            width2=j/2;
+            height2=i/2;
+            newPics[height2][width2].setColor(grabPixel.getColor());
+            
+            
+        }
+    }
+    
+    return newPic;
   }
   
   /** copy from the passed fromPic to the
@@ -499,7 +542,8 @@ public class Picture extends SimplePicture
       android1.mirrorDiagonalAndColor();
       android1.edgeDetection(5);
       // for android 2
-      android2.mirrorHorizontalBottomToTop();
+      android2= android2.scaleByHalf();
+      android2.setTrans();
       
       
       this.copy(canvas,0,0);
