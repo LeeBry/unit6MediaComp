@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.font.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 import java.text.*;
 import java.util.*;
 import java.util.List; // resolves problem with java.awt.List and java.util.List
@@ -286,31 +287,7 @@ public class Picture extends SimplePicture
     }
     
   }
-  
-  ///**
-  // * Changes the color of the whole image to half its value.
-  // */
-  //public void changeColor()
-  //{
-  // Pixel[][] pixels = this.getPixels2D();
-  // Pixel rowPixels= null;
-  // int width= pixels.length;
-  // int height= pixels[0].length;
-  // for (int row = 0; row < width; row++)
-  //  {
-  //    for (int col = 0; col < height; col++)
-  //    {
-  //        rowPixels= pixels[row][col];
-  //        int r=rowPixels.getRed()/2;
-  //        int g=rowPixels.getGreen()/2;
-  //        int b=rowPixels.getBlue()/2;
-  //        Color chosenColor = new Color(r,g,b);
-  //        rowPixels.setColor(chosenColor);
- 
-  //    }
-  //  }
-    
-  // }
+
    /** Method that mirrors the picture around a 
     * diagonal mirror in the center of the picture
    */
@@ -370,7 +347,7 @@ public class Picture extends SimplePicture
     }
     
   }
-   public void setTrans()
+   public void setWhiteToBlack()
   {
    Pixel[][] pixels = this.getPixels2D();
    Pixel onePixels= null;
@@ -384,10 +361,42 @@ public class Picture extends SimplePicture
           int r=onePixels.getRed();
           int g=onePixels.getGreen();
           int b=onePixels.getBlue();
-          Color trans = new Color (r,g,b,50);
-          
-             onePixels.setColor(trans);
-            
+          Color chosenColor = new Color(r,g,b);
+          Color black = new Color (0,0,0);
+          if (r>= 240 && g>= 240 && b>=240) //the >= gives it a range for the whites.
+          {
+             onePixels.setColor(black);
+            }
+        
+ 
+      }
+    }
+    
+  }
+   public void setRandomly()
+  {
+   Pixel[][] pixels = this.getPixels2D();
+   Pixel onePixels= null;
+   int width= pixels.length;
+   int height= pixels[0].length;
+   Random gener= new Random();
+   for (int row = 0; row < width; row++)
+    {
+      for (int col = 0; col < height; col++)
+      {
+          onePixels= pixels[row][col];
+          int r=onePixels.getRed();
+          int g=onePixels.getGreen();
+          int b=onePixels.getBlue();
+          int r1=gener.nextInt(255);
+          int g1=gener.nextInt(255);
+          int b1=gener.nextInt(255);
+          Color currentColor = new Color(r,g,b);
+          Color randomColor= new Color(r1,g1,b1);
+          if (r== 164 && g== 202 && b==57) //the >= gives it a range for the whites.
+          {
+             onePixels.setColor(randomColor);
+            }
         
  
       }
@@ -526,7 +535,7 @@ public class Picture extends SimplePicture
     this.mirrorVertical();
     this.write("collage.jpg");
   }
-  public void createCollage2()
+  public void createAndroidCollage()
   {
       // requirements: 4 of the same image: each one will be modified
       Picture android1= new Picture("android.jpg");
@@ -535,7 +544,7 @@ public class Picture extends SimplePicture
       Picture android4= new Picture("android.jpg");
       
       Picture canvas= new Picture(1600,1600);
-      //for android 1
+      //for android 2
       android1= android1.scaleByHalf();
       android1.eliminateWhite();
       android1.addLines();
@@ -543,13 +552,27 @@ public class Picture extends SimplePicture
       android1.edgeDetection(5);
       // for android 2
       android2= android2.scaleByHalf();
-      android2.setTrans();
-      
+      android2.addLines();
+      android2.mirrorDiagonal();
+      android2.mirrorHorizontal();
+      android2.mirrorVertical();
+      //for android 3
+      android3= android3.scaleByHalf();
+      android3.setWhiteToBlack();
+      android3.mirrorHorizontal();
+      //for android 4
+      android4= android4.scaleByHalf();
+      android4.mirrorVertical();
+      android4.setRandomly();
+      android4.setWhiteToBlack();
+     
       
       this.copy(canvas,0,0);
-      this.copy(android1,0,400);
-      this.copy(android2,0,0);
-      //this.write("collage.jpg"); //use this to write the image for the collage
+      this.copy(android1,0,0);
+      this.copy(android2,400,400);
+      this.copy(android3,400,0);
+      this.copy(android4,0,400);
+      this.write("Android Collage Finished.jpg"); //use this to write the image for the collage
      
       
   }

@@ -92,8 +92,8 @@ public class PictureTester
   }
   public static void testCollage2()
   {
-    Picture canvas = new Picture("640x480.jpg");
-    canvas.createCollage2();
+    Picture canvas = new Picture(800,800);
+    canvas.createAndroidCollage();
     canvas.explore();
   }
   public static void testAddLines()
