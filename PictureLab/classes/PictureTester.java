@@ -100,7 +100,6 @@ public class PictureTester
   { Picture temple = new Picture("temple.jpg");
     temple.explore();
     temple.addLines();
-    temple.changeColor();
     temple.explore();
     }
   /** Method to test edgeDetection */

@@ -287,49 +287,82 @@ public class Picture extends SimplePicture
     
   }
   
-  /**
-   * Changes the color of the whole image to half its value.
-   */
-  public void changeColor()
-  {
-   Pixel[][] pixels = this.getPixels2D();
-   Pixel rowPixels= null;
-   int width= pixels.length;
-   int height= pixels[0].length;
-   for (int row = 0; row < width; row++)
-    {
-      for (int col = 0; col < height; col++)
-      {
-          rowPixels= pixels[row][col];
-          int r=rowPixels.getRed()/2;
-          int g=rowPixels.getGreen()/2;
-          int b=rowPixels.getBlue()/2;
-          Color chosenColor = new Color(r,g,b);
-          rowPixels.setColor(chosenColor);
+  ///**
+  // * Changes the color of the whole image to half its value.
+  // */
+  //public void changeColor()
+  //{
+  // Pixel[][] pixels = this.getPixels2D();
+  // Pixel rowPixels= null;
+  // int width= pixels.length;
+  // int height= pixels[0].length;
+  // for (int row = 0; row < width; row++)
+  //  {
+  //    for (int col = 0; col < height; col++)
+  //    {
+  //        rowPixels= pixels[row][col];
+  //        int r=rowPixels.getRed()/2;
+  //        int g=rowPixels.getGreen()/2;
+  //        int b=rowPixels.getBlue()/2;
+  //        Color chosenColor = new Color(r,g,b);
+  //        rowPixels.setColor(chosenColor);
  
-      }
+  //    }
+  //  }
+    
+  // }
+   /** Method that mirrors the picture around a 
+    * diagonal mirror in the center of the picture
+   */
+    public void mirrorDiagonalAndColor()
+  { Pixel[][] pixels = this.getPixels2D();
+    Pixel topPixel = null;
+    Pixel flipPixel = null;
+    int width = pixels.length;
+    int height = pixels[0].length;
+    int use=0;
+    if (width >height)
+    {
+        use= height;
+    }
+    else
+    {
+        use= width;
     }
     
-  }
+    for (int row = 0; row < use; row++)
+    {
+      for (int col = 0; col < use; col++)
+      {
+        topPixel = pixels[row][col];
+        flipPixel = pixels[col][row];
+        int r=topPixel.getRed()/2;
+        int g=topPixel.getGreen()/2;
+        int b=topPixel.getBlue()/2;
+        Color diff= new Color(r,g,b);
+        flipPixel.setColor(diff);
+      }
+    } 
+    }
   public void eliminateWhite()
   {
    Pixel[][] pixels = this.getPixels2D();
-   Pixel rowPixels= null;
+   Pixel onePixels= null;
    int width= pixels.length;
    int height= pixels[0].length;
    for (int row = 0; row < width; row++)
     {
       for (int col = 0; col < height; col++)
       {
-          rowPixels= pixels[row][col];
-          int r=rowPixels.getRed();
-          int g=rowPixels.getGreen();
-          int b=rowPixels.getBlue();
+          onePixels= pixels[row][col];
+          int r=onePixels.getRed();
+          int g=onePixels.getGreen();
+          int b=onePixels.getBlue();
           Color chosenColor = new Color(r,g,b);
-          Color white= new Color(255,255,255);
-          if (chosenColor== white)
+          Color black = new Color (0,0,0);
+          if (r>= 240 && g>= 240 && b>=240) //the >= gives it a range for the whites.
           {
-             rowPixels.setColor(null);
+             onePixels.setColor(black);
             }
         
  
@@ -396,6 +429,13 @@ public class Picture extends SimplePicture
       
     }
     
+  public void scaleByHalf() // working on
+  {
+    Pixel[][] pixels = this.getPixels2D();
+    int width= pixels.length;
+    int height = pixels[0].length;
+  }
+  
   /** copy from the passed fromPic to the
     * specified startRow and startCol in the
     * current picture
@@ -443,17 +483,29 @@ public class Picture extends SimplePicture
     this.mirrorVertical();
     this.write("collage.jpg");
   }
-  
   public void createCollage2()
   {
-      Picture android= new Picture("android.jpg");
-      Picture background= new Picture("640x480.jpg");
-      background.changeColor();
-      android.addLines();
-      android.edgeDetection(5);
-      this.copy(background,0,0);
-      this.copy(android,100,100);
+      // requirements: 4 of the same image: each one will be modified
+      Picture android1= new Picture("android.jpg");
+      Picture android2= new Picture("android.jpg");
+      Picture android3= new Picture("android.jpg");
+      Picture android4= new Picture("android.jpg");
       
+      Picture canvas= new Picture("640x480.jpg");
+      canvas.eliminateWhite();
+      //for android 1
+      android1.eliminateWhite();
+      android1.addLines();
+      android1.mirrorDiagonalAndColor();
+      android1.edgeDetection(5);
+      // for android 2
+      android2.mirrorHorizontalBottomToTop();
+      
+      
+      this.copy(canvas,0,0);
+      this.copy(android1,0,0);
+      this.copy(android2,0,0);
+      //this.write("collage.jpg"); //use this to write the image for the collage
      
       
   }
